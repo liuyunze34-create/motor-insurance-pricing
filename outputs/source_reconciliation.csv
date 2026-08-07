@@ -1,0 +1,11 @@
+Check,Value
+Frequency policy rows,678013.0
+Frequency unique policy IDs,678013.0
+Severity claim records,26639.0
+Severity unique policy IDs,24950.0
+Matched severity policy IDs,24944.0
+Unmatched severity policy IDs,6.0
+Unmatched severity records,195.0
+Unmatched severity amount,788714.1800000002
+Positive claim-count policies with no severity record,9116.0
+Matched policies where claim count differs from severity record count,1.0
