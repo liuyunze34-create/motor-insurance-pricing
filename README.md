@@ -7,6 +7,8 @@
 
 Actuarial motor insurance pricing using the French MTPL dataset. The project models claim frequency and severity separately, combines them into pure premium, and compares traditional GLMs with a nonlinear gradient-boosting challenger.
 
+![Project overview](assets/project_overview.svg)
+
 ## At a glance
 
 | Portfolio | Selected model | Test Gini | Test D² |
@@ -15,7 +17,7 @@ Actuarial motor insurance pricing using the French MTPL dataset. The project mod
 
 The highest exposure-weighted risk decile has about **10.9×** the observed pure premium of the lowest decile.
 
-**Quick links:** [Dashboard](dashboard.html) · [Notebook](Motor_Insurance_Pricing.ipynb) · [Results](RESULTS.md) · [Portfolio summary](PORTFOLIO.md) · [Project report](PROJECT_REPORT.md)
+**Quick links:** [Live dashboard](https://liuyunze34-create.github.io/motor-insurance-pricing/) · [Notebook](Motor_Insurance_Pricing.ipynb) · [Results](RESULTS.md) · [Project report](PROJECT_REPORT.md)
 
 ## What the project does
 
@@ -71,35 +73,18 @@ After treatment, the modeling portfolio has observed frequency **0.0737** and ob
 
 ## Pricing relativities
 
-`outputs/pricing_relativities.csv` contains **prediction-based** relativities around a fixed reference policy. Each factor is changed one at a time while the rest of the policy is held constant. This avoids presenting regularized one-hot coefficients as if they were traditional base-level tariff relativities.
+`outputs/pricing_relativities.csv` contains prediction-based relativities around a fixed reference policy. Each factor is changed one at a time while the rest of the policy is held constant.
 
 ## Run locally
 
-Install dependencies:
-
 ```bash
 pip install -r requirements.txt
-```
-
-Download the two OpenML source tables:
-
-```bash
 python download_data.py
-```
-
-Run the full pipeline:
-
-```bash
 python run_project.py
-```
-
-Start the interactive pricing app:
-
-```bash
 streamlit run app.py
 ```
 
-Run the checks:
+Run the checks with:
 
 ```bash
 pytest -q
