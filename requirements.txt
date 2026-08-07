@@ -1,0 +1,9 @@
+numpy==2.3.5
+pandas==2.2.3
+scikit-learn==1.8.0
+matplotlib==3.10.8
+plotly==6.5.2
+joblib==1.5.3
+streamlit>=1.40,<2
+jupyter>=1.1,<2
+pytest>=8,<10
