@@ -6,6 +6,7 @@ from pathlib import Path
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+import project_utils as project_utils_module
 from project_utils import (
     RANDOM_STATE,
     create_dashboard_html,
@@ -23,6 +24,17 @@ from project_utils import (
     tweedie_power_sensitivity,
     validation_stability,
 )
+
+# Keep the GLM design matrix dense. This avoids SciPy sparse-indexing issues
+# when severity observations are selected with a pandas Boolean mask.
+_original_make_preprocessor = project_utils_module.make_preprocessor
+
+def _dense_make_preprocessor():
+    preprocessor = _original_make_preprocessor()
+    preprocessor.set_params(sparse_threshold=0.0)
+    return preprocessor
+
+project_utils_module.make_preprocessor = _dense_make_preprocessor
 
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "data"
