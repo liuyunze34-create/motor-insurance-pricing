@@ -1,0 +1,10 @@
+Check,Value
+Policy rows,678013
+Unique policy IDs,678013
+Duplicate policy IDs,0
+Missing values after join,0
+Exposure <= 0,0
+Exposure > 1,1224
+Claim count > 4,9
+"Claim amount > 200,000",20
+Positive claim count but zero recorded amount,9116
