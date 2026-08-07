@@ -96,7 +96,7 @@ pytest -q
 
 ## Reproducing the results
 
-The public repository keeps raw data and row-level test predictions out of version control. `download_data.py` restores the source data, and `run_project.py` recreates the outputs, figures, and fitted models.
+The public repository keeps the raw CSVs, row-level test predictions, fitted `.joblib` objects and generated PNG charts out of version control. `download_data.py` restores the source data, and `run_project.py` recreates the detailed outputs, figures and fitted models. Compact validation and test summaries are committed so the main results can be reviewed without rerunning the full pipeline.
 
 ## Project files
 
@@ -108,8 +108,8 @@ app.py                          Streamlit dashboard and policy example
 dashboard.html                  static dashboard
 download_data.py                OpenML download script
 outputs/                        compact validation and test summaries
-figures/                        exported charts
-models/                         fitted model objects used by the demo app
+figures/                        generated chart documentation
+models/                         generated model documentation
 tests/                          data and pipeline checks
 ```
 
