@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Insurance Pricing</title>
+<style>
+body{font-family:Arial,sans-serif;max-width:1180px;margin:32px auto;padding:0 22px;color:#222;background:#fafafa}h1{margin-bottom:4px}h2{margin-top:30px}.sub{color:#666}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{background:#fff;border:1px solid #ddd;border-radius:8px;padding:16px}.label{font-size:12px;color:#666;text-transform:uppercase}.value{font-size:25px;font-weight:700;margin-top:6px}.section{background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:8px;border-bottom:1px solid #e5e5e5;text-align:right}th:first-child,td:first-child{text-align:left}.note{background:#f3f5f7;border-left:3px solid #777;padding:10px 12px}@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<h1>Motor Insurance Pricing</h1>
+<p class="sub">French MTPL frequency, severity and pure-premium modeling</p>
+<div class="section">
+<h2>Modeling portfolio</h2>
+<div class="cards">
+<div class="card"><div class="label">Policies</div><div class="value">678,013</div></div>
+<div class="card"><div class="label">Claims</div><div class="value">26,406</div></div>
+<div class="card"><div class="label">Frequency</div><div class="value">0.0737</div></div>
+<div class="card"><div class="label">Pure premium</div><div class="value">€145.58</div></div>
+</div>
+<p>The raw joined portfolio contains 36,102 claims and €167.11 observed pure premium. The modeling portfolio is shown separately because the frequency and severity sources do not reconcile perfectly and a small number of extreme observations are capped.</p>
+</div>
+<div class="section">
+<h2>Model comparison</h2>
+<p class="note">The pricing model family was chosen using three repeated validation splits. The final test set was held back until after that choice.</p>
+<table><thead><tr><th>Model</th><th>Mean validation deviance</th><th>SD</th><th>Mean Gini</th></tr></thead><tbody>
+<tr><td>Boosted two-part</td><td>73.714</td><td>1.730</td><td>0.346</td></tr>
+<tr><td>Two-part GLM</td><td>74.941</td><td>1.135</td><td>0.317</td></tr>
+<tr><td>Direct Tweedie GLM</td><td>75.028</td><td>1.071</td><td>0.308</td></tr>
+</tbody></table>
+<h3>Final test</h3>
+<table><thead><tr><th>Model</th><th>D²</th><th>Gini</th><th>Normalized Gini</th><th>Predicted / actual</th></tr></thead><tbody>
+<tr><td>Two-part GLM</td><td>4.22%</td><td>0.278</td><td>0.282</td><td>0.932</td></tr>
+<tr><td>Direct Tweedie GLM</td><td>3.91%</td><td>0.282</td><td>0.286</td><td>0.933</td></tr>
+<tr><td><strong>Boosted two-part</strong></td><td><strong>5.99%</strong></td><td><strong>0.320</strong></td><td><strong>0.325</strong></td><td><strong>0.933</strong></td></tr>
+</tbody></table>
+</div>
+<div class="section">
+<h2>Risk deciles</h2>
+<table><thead><tr><th>Decile</th><th>Exposure</th><th>Observed pure premium</th><th>Predicted pure premium</th><th>Actual / predicted</th></tr></thead><tbody>
+<tr><td>1</td><td>7,160</td><td>€42.53</td><td>€57.37</td><td>0.74</td></tr>
+<tr><td>2</td><td>7,160</td><td>€131.83</td><td>€74.12</td><td>1.78</td></tr>
+<tr><td>3</td><td>7,160</td><td>€84.88</td><td>€84.99</td><td>1.00</td></tr>
+<tr><td>4</td><td>7,160</td><td>€109.24</td><td>€94.70</td><td>1.15</td></tr>
+<tr><td>5</td><td>7,159</td><td>€120.10</td><td>€105.08</td><td>1.14</td></tr>
+<tr><td>6</td><td>7,160</td><td>€91.77</td><td>€117.40</td><td>0.78</td></tr>
+<tr><td>7</td><td>7,159</td><td>€100.88</td><td>€133.46</td><td>0.76</td></tr>
+<tr><td>8</td><td>7,160</td><td>€157.70</td><td>€159.09</td><td>0.99</td></tr>
+<tr><td>9</td><td>7,160</td><td>€237.07</td><td>€204.41</td><td>1.16</td></tr>
+<tr><td>10</td><td>7,160</td><td>€462.43</td><td>€404.08</td><td>1.14</td></tr>
+</tbody></table>
+<p>The highest-risk decile has about <strong>10.9×</strong> the observed pure premium of the lowest-risk decile. Middle deciles are not perfectly monotonic, which is kept visible because severity is volatile.</p>
+</div>
+<div class="section">
+<h2>Source reconciliation</h2>
+<table><tbody>
+<tr><td>Frequency policy rows</td><td>678,013</td></tr>
+<tr><td>Severity claim records</td><td>26,639</td></tr>
+<tr><td>Matched severity policy IDs</td><td>24,944</td></tr>
+<tr><td>Unmatched severity policy IDs</td><td>6</td></tr>
+<tr><td>Unmatched severity records</td><td>195</td></tr>
+<tr><td>Unmatched severity amount</td><td>€788,714</td></tr>
+<tr><td>Positive claim-count policies without severity record</td><td>9,116</td></tr>
+</tbody></table>
+</div>
+<div class="section">
+<h2>Modeling notes</h2>
+<p>The actuarial baselines use Poisson claim frequency, Gamma conditional severity and a direct Tweedie pure-premium model. The nonlinear challenger uses histogram gradient boosting for frequency and severity. Exposure weights frequency and pure-premium models; claim count weights severity.</p>
+<p>Severity remains the weakest component. The top 1% of positive-loss policies account for about 28.7% of modeled claim amount even after the €200,000 policy loss cap.</p>
+<p>Pricing relativities in the repository are prediction-based around a fixed reference policy rather than raw one-hot coefficients.</p>
+</div>
+<p class="sub">Portfolio exercise only. Pure premium excludes expenses, profit, tax, capital and regulatory adjustments.</p>
+</body>
+</html>
