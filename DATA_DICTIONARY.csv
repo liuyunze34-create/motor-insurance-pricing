@@ -1,0 +1,26 @@
+Variable,Role,Description
+IDpol,Identifier,Policy identifier used to join frequency and severity data
+ClaimNb,Target input,Number of recorded claims during the exposure period
+Exposure,Weight,Policy exposure in years
+VehPower,Rating factor,Vehicle power category
+VehAge,Rating factor,Vehicle age in years
+DrivAge,Rating factor,Driver age in years
+BonusMalus,Rating factor,French bonus-malus score; higher values generally indicate a worse claim history
+VehBrand,Rating factor,Vehicle brand group
+VehGas,Rating factor,Vehicle fuel type
+Area,Rating factor,Geographic area category
+Density,Rating factor,Population density of the policy location
+Region,Rating factor,French geographic region
+ClaimAmount,Target input,Total claim amount after aggregating individual claims to policy level
+Frequency,Modeled target,ClaimNb divided by Exposure
+AvgClaimAmount,Modeled target,ClaimAmount divided by max(ClaimNb,1); severity models use positive-loss policies only
+PurePremium,Modeled target,ClaimAmount divided by Exposure
+PredictedFrequency,Model output,Poisson GLM predicted claims per exposure-year
+PredictedSeverity,Model output,Gamma GLM predicted amount per claim conditional on a claim
+PredictedPurePremiumTwoPartGLM,Model output,Poisson frequency multiplied by Gamma severity
+PredictedPurePremiumTweedie,Model output,Direct Tweedie GLM expected claim cost per exposure-year
+PredictedBoostFrequency,Model output,Gradient-boosting predicted claims per exposure-year
+PredictedBoostSeverity,Model output,Gradient-boosting predicted amount per claim conditional on a claim
+PredictedPurePremiumBoosted,Model output,Boosted frequency multiplied by boosted severity
+SelectedPredictedPurePremium,Model output,Prediction from the pricing model selected on repeated validation
+RiskDecile,Segmentation,Test policies ranked into exposure-weighted groups from 1 lowest to 10 highest predicted pure premium
