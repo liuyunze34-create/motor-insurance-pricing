@@ -1,0 +1,24 @@
+{
+  "selected_params": {
+    "poisson_alpha": 0.001,
+    "gamma_alpha": 1.0,
+    "tweedie_alpha": 0.1,
+    "tweedie_power": 1.5,
+    "boost_max_leaf_nodes": 31
+  },
+  "selected_model": "Boosted two-part",
+  "selection_rule": "Lowest mean Tweedie deviance across three repeated validation splits",
+  "selected_model_gini": 0.3195856452396597,
+  "oracle_gini": 0.9841041351290964,
+  "selected_normalized_gini": 0.3247477922625901,
+  "calibration_factors": {
+    "frequency": 0.9996642761607971,
+    "severity": 1.00571337272539,
+    "tweedie": 0.9975409422154612,
+    "boost_frequency": 0.998746709808059,
+    "boost_severity": 1.0775683301841807
+  },
+  "random_state": 42,
+  "test_fraction": 0.2,
+  "stability_seeds": [11, 23, 77]
+}
