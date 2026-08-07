@@ -1,0 +1,5 @@
+Adjustment,Treatment,AffectedPolicies,AggregateChange
+Claim-count cap,ClaimNb capped at 4,9,46.0
+Exposure cap,Exposure capped at 1 year,1224,139.34000000008382
+Loss cap,"Policy claim amount capped at €200,000",20,7737579.419999994
+Count/severity alignment,Positive claim count reset to 0 when no claim amount is recorded,9116,9657.0
